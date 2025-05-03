@@ -22,7 +22,11 @@ on:
         type: string
     
 jobs:
-  register-environment:
+  get-config:
+      uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
+      with:
+        file_name: config-infra-prod.yml
+  register-environment:     
     runs-on: ubuntu-latest
     steps:
       - name: checkout
