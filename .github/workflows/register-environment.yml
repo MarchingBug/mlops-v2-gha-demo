@@ -28,10 +28,10 @@ jobs:
       - name: list-extentions
         run: az extension list
       - name: show-parameters
-        run: echo ${{ needs.get-config.outputs.workspace_name }}
+        run: echo ${{ needs.get-config.outputs.aml_workspace }}
       - name: create-environment-from-file-with-conda
         run: |
           az ml environment create --file ${{ github.workspace }}/mlops/azureml/train/train-env.yml --resource-group ${{ needs.get-config.outputs.resource_group }} \
-                                --workspace-name ${{ needs.get-config.outputs.workspace_name }} --conda-file ${{ github.workspace }}/data-science/environment/train-conda.yml
+                                --workspace-name ${{ needs.get-config.outputs.aml_workspace }} --conda-file ${{ github.workspace }}/data-science/environment/train-conda.yml
            
       
