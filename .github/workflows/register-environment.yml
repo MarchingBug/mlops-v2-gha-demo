@@ -51,9 +51,9 @@ jobs:
           #
           # Choose the appropriate method based on your security requirements
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          client-id: ${{ secrets.ARM_CLIENT_ID }}
-          tenant-id: ${{ secrets.ARM_TENANT_ID }}
-          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          #client-id: ${{ secrets.ARM_CLIENT_ID }}
+          #tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          #subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           enable-oidc: false
       - name: install-extension
         run: az extension add -n ml -y
