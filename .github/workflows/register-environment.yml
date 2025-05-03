@@ -49,7 +49,7 @@ jobs:
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           # Uncomment next line to use OIDC
-          #enable-oidc: true
+          enable-oidc: true
       - name: install-extension
         run: az extension add -n ml -y
       - name: update-extension
