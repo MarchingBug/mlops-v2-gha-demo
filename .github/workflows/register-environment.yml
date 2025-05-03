@@ -36,8 +36,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: "Az CLI login"
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           # Azure login can use either Service Principal or OIDC authentication:
           # 1. Service Principal: Uses client ID, tenant ID, client secret/certificate
           #    Example: creds: ${{secrets.creds}}
@@ -50,11 +51,12 @@ jobs:
           #    enable-oidc: true
           #
           # Choose the appropriate method based on your security requirements
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          #enable-AzPSSession: true
+          #creds: ${{ secrets.AZURE_CREDENTIALS }}
           #client-id: ${{ secrets.ARM_CLIENT_ID }}
           #tenant-id: ${{ secrets.ARM_TENANT_ID }}
           #subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          enable-oidc: false
+          #enable-oidc: true
       - name: install-extension
         run: az extension add -n ml -y
       - name: update-extension
