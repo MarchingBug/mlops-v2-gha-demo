@@ -1,25 +1,6 @@
 name: register-environment
 
 on:  
-  workflow_call:
-    inputs:
-      environment_file:
-        required: true
-        type: string
-      resource_group:
-        required: true
-        type: string
-      workspace_name:
-        required: true
-        type: string
-      conda_file:
-        required: false
-        default: ""
-        type: string
-      dockerfile-location:
-        required: false
-        default: ""
-        type: string
   workflow_dispatch:
       
 jobs:
