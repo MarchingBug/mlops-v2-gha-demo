@@ -21,8 +21,14 @@ on:
         default: ""
         type: string
     secrets:
+      client-id: 
+        required: false
+      tenant-id: 
+        required: false
+      subscription-id: 
+        required: false
       creds:
-        required: true
+        required: false
 jobs:
   register-environment:
     runs-on: ubuntu-latest
@@ -48,8 +54,7 @@ jobs:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          # Uncomment next line to use OIDC
-          enable-oidc: true
+          enable-oidc: false
       - name: install-extension
         run: az extension add -n ml -y
       - name: update-extension
