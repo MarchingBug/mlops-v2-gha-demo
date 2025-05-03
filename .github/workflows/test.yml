@@ -8,13 +8,10 @@ jobs:
     uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
     with:
       file_name: config-infra-prod.yml
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
 
-  register-environment:
-    needs: get-config
-    uses: MarchingBug/mlops-v2-gha-demo/.github/workflows/register-environment.yml@main
-    with:
-      resource_group: ${{ needs.get-config.outputs.resource_group }}
-      workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
-      environment_file: mlops/azureml/train/train-env.yml
-      conda_file: data-science/environment/train-conda.yml
-      creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
