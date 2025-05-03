@@ -20,10 +20,7 @@ on:
         required: false
         default: ""
         type: string
-  workflow_dispatch:
-     with:
-       environment_file:  mlops/azureml/train/train-env.yml
-       conda_file: data-science/environment/train-conda.yml
+  workflow_dispatch:    
    
 jobs:
   get-config:
