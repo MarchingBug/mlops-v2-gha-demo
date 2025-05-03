@@ -1,6 +1,6 @@
 name: register-environment
 
-on:
+on:  
   workflow_call:
     inputs:
       environment_file:
@@ -20,7 +20,8 @@ on:
         required: false
         default: ""
         type: string
-    
+  workflow_dispatch:
+   
 jobs:
   get-config:
       uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
