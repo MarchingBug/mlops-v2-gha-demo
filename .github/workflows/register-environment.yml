@@ -20,15 +20,7 @@ on:
         required: false
         default: ""
         type: string
-    secrets:
-      client-id: 
-        required: false
-      tenant-id: 
-        required: false
-      subscription-id: 
-        required: false
-      creds:
-        required: false
+    
 jobs:
   register-environment:
     runs-on: ubuntu-latest
