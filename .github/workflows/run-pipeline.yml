@@ -24,7 +24,7 @@ jobs:
         run: az extension update -n ml
       - name: run-ml-pipeline
         run: |
-          run_id=$(az ml job create --file ${{ github.workspace }}/ mlops/azureml/train/pipeline.yml --resource-group ${{ needs.get-config.outputs.resource_group }} --workspace-name ${{ needs.get-config.outputs.aml_workspace }} --query name -o tsv)
+          run_id=$(az ml job create --file ${{ github.workspace }}/mlops/azureml/train/pipeline.yml --resource-group ${{ needs.get-config.outputs.resource_group }} --workspace-name ${{ needs.get-config.outputs.aml_workspace }} --query name -o tsv)
           if [[ -z "$run_id" ]]
           then
             echo "Job creation failed"
