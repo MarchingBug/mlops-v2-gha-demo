@@ -25,4 +25,4 @@ jobs:
       - name: allocate-traffic      
         run: |
           az ml online-endpoint update --name ${{ format('taxi-gha-{0}', needs.get-config.outputs.oep) }} --traffic "taxi-online-dp=100" \
-          --resource-group ${{ inputs.resource_group }} --workspace-name ${{ inputs.workspace_name }}
+          --resource-group ${{ needs.get-config.outputs.resource_group } --workspace-name ${{ needs.get-config.outputs.aml_workspace }}
