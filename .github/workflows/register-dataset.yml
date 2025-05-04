@@ -26,6 +26,6 @@ jobs:
         run: az extension update -n ml
       - name: create-dataset-from-file      
         run: |
-          az ml data create --file ${{ github.workspace }}/mlops/azureml/train/data.yml --resource-group ${{ needs.outputs.resource_group }} \
-          --workspace-name ${{ needs.outputs.aml_workspace }} --name taxi-data
+          az ml data create --file ${{ github.workspace }}/mlops/azureml/train/data.yml --resource-group ${{ needs.get-config.outputs.resource_group }} \
+          --workspace-name ${{ needs.get-config.outputs.aml_workspace }} --name taxi-data
       
