@@ -11,8 +11,8 @@ jobs:
         #conda_file: data-science/environment/train-conda.yml
         file_name: config-infra-prod.yml  
   register-dataset:
-    runs-on: ubuntu-latest
     needs: get-config
+    runs-on: ubuntu-latest    
     steps:
       - name: checkout
         uses: actions/checkout@v3
