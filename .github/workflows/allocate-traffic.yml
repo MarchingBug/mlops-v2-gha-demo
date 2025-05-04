@@ -1,0 +1,28 @@
+name: allocate-traffic
+
+on: 
+   workflow_dispatch:
+   
+jobs:
+  get-config:
+      uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
+      with:       
+        file_name: config-infra-prod.yml  
+  allocate-traffic:
+    needs: get-config
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: "Az CLI login"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}    
+      - name: install-extension
+        run: az extension add -n ml -y
+      - name: update-extension
+        run: az extension update -n ml
+      - name: allocate-traffic      
+        run: |
+          az ml online-endpoint update --name ${{ format('taxi-gha-{0}', needs.get-config.outputs.oep) }} --traffic "taxi-online-dp=100" \
+          --resource-group ${{ inputs.resource_group }} --workspace-name ${{ inputs.workspace_name }}
