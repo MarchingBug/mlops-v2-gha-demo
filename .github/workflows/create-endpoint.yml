@@ -1,0 +1,29 @@
+name: create-endpoint
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  get-config:
+      uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
+      with:       
+        file_name: config-infra-prod.yml 
+  create-endpoint:
+    needs: get-config
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: "Az CLI login"
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}          
+      - name: install-extension
+        run: az extension add -n ml -y
+      - name: update-extension
+        run: az extension update -n ml
+      - name: create-environment-from-file
+        run: |
+          az ml online-endpoint create --name ${{ format('taxi-gha-{0}', needs.get-config.outputs.oep) }} \
+          -f ${{ github.workspace }}/mlops/azureml/deploy/online/online-endpoint.yml --resource-group  ${{ needs.get-config.outputs.resource_group }} \
+          --workspace-name ${{ needs.get-config.outputs.aml_workspace }} 
